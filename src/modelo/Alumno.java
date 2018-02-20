@@ -1,10 +1,14 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Alumno {
 	private int id;
 	private String dni;
 	private String nombre;
 	private String email;
+	//por la relacion
+	private ArrayList<Matricula> matriculas;
 	
 	public Alumno(){
 		

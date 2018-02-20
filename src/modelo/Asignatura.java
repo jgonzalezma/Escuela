@@ -1,9 +1,13 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Asignatura {
 	private int id;
 	private String nombre;
 	private int horas;
+	//por la relacion
+	private ArrayList<Matricula> matriculas;
 	
 	public void Asignatura(){
 		

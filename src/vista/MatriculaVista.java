@@ -1,47 +1,33 @@
 package vista;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Iterator;
 
 import modelo.Alumno;
 import modelo.AlumnoModelo;
+import modelo.Asignatura;
 import modelo.AsignaturaModelo;
+import modelo.Matricula;
 
-public class MatriculaVista extends Alumno {
+public class MatriculaVista {
 
-	public void menuEscuela() {
-		final int ALUMNOS = 1;
-		final int ASIGNATURAS = 2;
-		final int SALIR = 0;
+	public void mostrarMatriculas(ArrayList<Matricula> matriculas){
+		Iterator<Matricula> i = matriculas.iterator();
+		while(i.hasNext()){
+			Matricula matricula = i.next();
+			mostrarMatricula(matricula);
+		}
 		
-		int opcion;
-		Scanner scan = new Scanner(System.in);
-		do {
-			System.out.println("---MENU---");
-			System.out.println(ALUMNOS + "- Alumnos");
-			System.out.println(ASIGNATURAS + "- Asignaturas");
-			System.out.println(SALIR + "- Salir");
-			opcion = Integer.parseInt(scan.nextLine());
-			switch (opcion) {
-			case ALUMNOS:
-				AlumnoModelo am = new AlumnoModelo();
-				am.matriculaId(getId());
-				break;
-				
-			case ASIGNATURAS:
-				AsignaturaModelo asm = new AsignaturaModelo();
-				asm.matriculaId(getId());
-				break;
-				
-			case SALIR:
-					System.out.println("Saliendo...");
-
-				break;
-			default:
-				System.out.println("Opcion mal");
-				break;
-			}
-		} while (opcion != SALIR);
 	}
-
+	
+	public void mostrarMatricula(Matricula matricula){
+		//conseguir la info de asignatura y alumno
+		AsignaturaModelo asignaturaModelo = new AsignaturaModelo();
+		Asignatura asignatura = asignaturaModelo.getAsignatura(matricula.getId_asignatura());
+		AlumnoModelo alumnoModelo = new AlumnoModelo();
+		Alumno alumno = alumnoModelo.getAlumno(matricula.getId_alumno());
+		
+		System.out.println(alumno.getNombre() + " : " + alumno.getDni() + " : " + asignatura.getNombre() + " : "
+				+ asignatura.getHoras() + " : " + matricula.getFecha());
+	}
 }
